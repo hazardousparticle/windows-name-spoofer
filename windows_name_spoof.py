@@ -1,10 +1,12 @@
+#! /usr/bin/env python3
+
+# script to generate a fake windows netbios name and trick machines to dicover it.
+
 import random
 import string
 import socket
 from struct import pack
 from time import sleep
-
-# I pretty much rewrote part of samba here
 
 nbns_port=137
 browser_port=138
@@ -167,7 +169,8 @@ def sendBrowserAnnouncement(hostname,host_addr):
     #craft the packet
     
     #step 1: craft the Broswer proto
-    browser_cmd = 0x01 #(1byte) #host announcement, 0x01, local master announcent= 0x0f    browser_update_count = 0x02 #(1 byte)
+    browser_cmd = 0x01 #(1byte) #host announcement, 0x01, local master announcent= 0x0f
+    browser_update_count = 0x02 #(1 byte)
     browser_update_period = 0x20120a00 #(11 min, need to figure out how this is determined)
 
     #pad the hostname with 0s
